@@ -22,16 +22,30 @@ const starterTeam = [
   }
 ]
 
-const onChange = () => {
-
-} 
-
-const onSubmit = () => {
-
-} 
-
 function App() {
   const [formValues, setFormValues] = useState([])
+  const [teamList, setTeamList] = useState(starterTeam)
+
+  const change = (inputName, inputValue) => {
+    setFormValues({...formValues, [inputName]:inputValue })
+  } 
+  
+  const submit = () => {
+
+    const newMember = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      role: formValues.role,
+    }
+
+    if (!newMember.name || !newMember.email || !newMember.role) {
+      return
+    }
+
+    setTeamList(teamList.concat(newMember))
+
+    setFormValues(initialValues)
+  } 
 
   useEffect(() => {
     setFormValues(initialValues)
@@ -42,7 +56,7 @@ function App() {
     <div className="App">
       <header>  
       </header>
-      <Form values={formValues} onChange={onChange} onSubmit={onSubmit} />
+      <Form values={formValues} change={change} submit={submit} />
     </div>
   );
 }

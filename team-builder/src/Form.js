@@ -2,7 +2,19 @@ import React from 'react';
 
 
 const Form = (props) => {
-    const { onChange, values, onSubmit } = props
+    const { change, values, submit } = props
+
+    const onChange = evt => {
+        const { name, value } = evt.target
+        change(name,value)
+    }
+
+    const onSubmit = evt => {
+        evt.preventDefault()
+        submit()
+    }
+
+
     return(
         <form onSubmit={onSubmit}>
             
@@ -35,7 +47,7 @@ const Form = (props) => {
                 </select>
             </label>
 
-            <button disabled={!values.name || !values.user || !values.role}>Submit</button>
+            <button disabled={!values.name || !values.email || !values.role}>Submit</button>
 
         </form>
     )
